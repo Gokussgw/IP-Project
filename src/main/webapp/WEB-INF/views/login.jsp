@@ -15,7 +15,7 @@
     }
     .bg-image {
         /* The image used */
-        background-image: url('image.jpg');
+        background-image: url('${pageContext.request.contextPath}/resources/images/image.jpg');
         
         /* Add the blur effect */
         filter: blur(8px);
@@ -95,7 +95,7 @@
 
 <div class="login-container">
     <div class="logo">
-        <img src="logo.gif" alt="Company Logo">
+        <img src="${pageContext.request.contextPath}/resources/images/logo.gif" alt="Company Logo">
     </div>
     <h2>LCS PANTAU SYSTEM</h2>
     <form class="login-form" id="loginForm" method="POST" action="${pageContext.request.contextPath}/mbip/login">

@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page import="my.utm.ip.spring_jdbc.entity.User" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="ISO-8859-1" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +30,7 @@
         overflow: hidden;
         min-height: 100vh;
         font-family: Arial, sans-serif;
-        background: url('image.jpg') no-repeat center center fixed;
+        background: url('${pageContext.request.contextPath}/resources/images/image.jpg') no-repeat center center fixed;
         background-size: cover;
         display:flex;
       
@@ -168,26 +169,33 @@
 
     <div class="sidebar">
         <h1 style="color: #fff;">Dashboard</h1>
-        <img src="user.png" alt="User Icon" class="user-icon" />
+        <img src="${pageContext.request.contextPath}/resources/images/user.png" alt="User Icon" class="user-icon" />
         <div class="menu-item">
-            <img src="dashboard.svg" alt="Dashboard Icon" />
-            <span><h3><a href ="HomePage.jsp">Dashboard</a></h3></span>
+            <img src="${pageContext.request.contextPath}/resources/images/dashboard.svg" alt="Dashboard Icon" />
+            <span><h3><a href ="HomePage">Dashboard</a></h3></span>
         </div>
         
         <div class="menu-item">
-            <img src="scan.png" alt="Scan and Submit Icon" />
-            <span><h3><a href="upload.jsp">Scan & Submit</a></h3></span>
+            <img src="${pageContext.request.contextPath}/resources/images/scan.png" alt="Scan and Submit Icon" />
+            <span>
+                <h3>
+                    <form action="${pageContext.request.contextPath}/mbip/upload/${user.getUserId()}" method="POST">
+                        <input type="hidden" name="userId" value="${user.userId}" />
+                        <button type="submit">Scan & Submit</button>
+                    </form>
+                </h3>
+            </span>
         </div>
        
         
         <div class="menu-item">
-            <img src="map.png" alt="Carbon Data Icon" />
-            <span><h3><a href="map.jsp">Carbon Data</a></h3></span>
+            <img src="${pageContext.request.contextPath}/resources/images/map.png" alt="Carbon Data Icon" />
+            <span><h3><a href="map">Carbon Data</a></h3></span>
         </div>
-        </a>
+        
        
         <div class="menu-item">
-            <img src="user.png" alt="My Account Icon" />
+            <img src="${pageContext.request.contextPath}/resources/images/user.png" alt="My Account Icon" />
             <span><h3> <a href="Account.jsp">My Account </a></h3></span>
         </div>
         </a>
@@ -197,16 +205,16 @@
     <div class="header">
         <h1>LCS PANTAU SYSTEM</h1>
     </div>
-      <a href="login.jsp"><h3 style="text-align: right;">Logout</h3></a>
+      <a href="${pageContext.request.contextPath}/mbip/"><h3 style="text-align: right;">Logout</h3></a>
     
     <div class="top-bar">
         <!-- Add your logos here -->
         <div class="account-info">
             <table style="border: black;">
                 <td>
-            <div>NAME: JOHN DOE</div>
-            <div>RESIDENTIAL AREA: SKUDAI</div>
-            <div>ID NUMBER: 12345 </div>
+            <div>Name: ${user.getName()}</div>
+            <div>Residential Area: ${user.getResidentialArea()}</div>
+            <div>ID Number : ${user.getIDNumber()}</div>
         </td>
         </table>
         
@@ -214,25 +222,25 @@
     </div>
     
     <div class="validation-warning">
-        <h2>YOUR ACCOUNT IS UNVALIDATED, PLEASE CLICK HERE FOR VALIDATION</h2>
+        
     </div>
     
     <div class="menu">
         <a href="upload.jsp">
         <div class="menu-item">
-            <img src="scan.png" alt="Scan and Submit Icon" />
+            <img src="${pageContext.request.contextPath}/resources/images/scan.png" alt="Scan and Submit Icon" />
             <h3>Scan & Submit</h3>
         </div>
     </a>
     <a href="map.jsp">
     <div class="menu-item">
-            <img src="map.png" alt="Carbon Data Icon" />
+            <img src="${pageContext.request.contextPath}/resources/images/map.png" alt="Carbon Data Icon" />
             <h3> Carbon Data</h3>
         </div>
     </a>
         <a href="Account.jsp">
         <div class="menu-item">
-            <img src="user.png" alt="My Account Icon" />
+            <img src="${pageContext.request.contextPath}/resources/images/user.png" alt="My Account Icon" />
             <h3> My Account</h3>
             
         </div>

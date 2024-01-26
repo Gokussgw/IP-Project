@@ -46,5 +46,10 @@ public class UserRepository {
         return jdbcTemplate.queryForObject(sql, new UserMapper(), email);
     }
 
+    public User findUserById(int id) {
+        String sql = "SELECT * FROM users WHERE userid =?";
+        return jdbcTemplate.queryForObject(sql, new UserMapper(), id);
+    }
+
     // Additional methods as needed
 }

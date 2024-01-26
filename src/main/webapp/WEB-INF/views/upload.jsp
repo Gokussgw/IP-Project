@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page import="my.utm.ip.spring_jdbc.entity.User" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="ISO-8859-1" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,7 +77,7 @@
     // Create a new select element for bill type
     var select = document.createElement("select");
     select.name = 'billType[]';
-    var options = ["Electricity", "Water", "Internet", "Gas", "Telephone"];
+    var options = ["Water", "Fabric", "CookingOil", "FoodWaste", "Recycle", "Energy"];
     for (var i = 0; i < options.length; i++) {
         var option = document.createElement("option");
         option.value = options[i].toLowerCase();
@@ -86,7 +87,7 @@
     
     // Create a new input element for file upload
     var input = document.createElement("input");
-    input.type = 'file';
+    input.type = 'text';
     input.name = 'billFile[]';
     
     // Create line breaks for spacing
@@ -124,7 +125,7 @@
         overflow: hidden;
         min-height: 100vh;
         font-family: Arial, sans-serif;
-        background: url('image.jpg') no-repeat center center fixed;
+        background: url('${pageContext.request.contextPath}/resources/images/image.jpg') no-repeat center center fixed;
         background-size: cover;
         display:flex;
       
@@ -262,26 +263,26 @@
 <body>
     <div class="sidebar">
         <h1 style="color: #fff;">Dashboard</h1>
-        <img src="user.png" alt="User Icon" class="user-icon" />
+        <img src="${pageContext.request.contextPath}/resources/images/user.png" alt="User Icon" class="user-icon" />
         <div class="menu-item">
-            <img src="dashboard.svg" alt="Dashboard Icon" />
+            <img src="${pageContext.request.contextPath}/resources/images/dashboard.svg" alt="Dashboard Icon" />
             <span><h3><a href ="HomePage.jsp">Dashboard</a></h3></span>
         </div>
         
         <div class="menu-item">
-            <img src="scan.png" alt="Scan and Submit Icon" />
+            <img src="${pageContext.request.contextPath}/resources/images/scan.png" alt="Scan and Submit Icon" />
             <span><h3><a href="upload.jsp">Scan & Submit</a></h3></span>
         </div>
        
         
         <div class="menu-item">
-            <img src="map.png" alt="Carbon Data Icon" />
+            <img src="${pageContext.request.contextPath}/resources/images/map.png" alt="Carbon Data Icon" />
             <span><h3><a href="map.jsp">Carbon Data</a></h3></span>
         </div>
         </a>
        
         <div class="menu-item">
-            <img src="user.png" alt="My Account Icon" />
+            <img src="${pageContext.request.contextPath}/resources/images/user.png" alt="My Account Icon" />
             <span><h3> <a href="Account.jsp">My Account </a></h3></span>
         </div>
         </a>
@@ -296,9 +297,9 @@
             <div class="account-info">
                 <table style="border: black;">
                     <td>
-                <div>NAME: JOHN DOE</div>
-                <div>RESIDENTIAL AREA: SKUDAI</div>
-                <div>ID NUMBER: 12345 </div>
+                <div>NAME: ${user.getName()}</div>
+                <div>RESIDENTIAL AREA: ${user.getResidentialArea()}</div>
+                <div>ID NUMBER: ${user.getIDNumber()} </div>
             </td>
             </table>
             
@@ -312,14 +313,16 @@
                 <br><br>
                 <label>Type of Bill:</label>
                 <select name="billType[]">
-                    <option value="electricity">Electricity</option>
                     <option value="water">Water</option>
-                    <option value="internet">Internet</option>
-                    <option value="gas">Gas</option>
-                    <option value="telephone">Telephone</option>
+                    <option value="fabric">Fabric</option>
+                    <option value="cookingOil">Cooking Oil</option>
+                    <option value="FoodWaste">Food Waste</option>
+                    <option value="Recycle">Recycle</option>
+                    <option value="Energy">Energy</option>
                 </select>
+                
         
-                <input type="file" name="billFile[]">
+                <input type="number" name="billFile[]">
                 <br>
             </div>
             <br><br>

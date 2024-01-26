@@ -1,5 +1,6 @@
 package my.utm.ip.spring_jdbc.controller;
 
+import my.utm.ip.spring_jdbc.entity.Course;
 import my.utm.ip.spring_jdbc.entity.User;
 import my.utm.ip.spring_jdbc.service.*;
 import java.sql.SQLException;
@@ -31,12 +32,12 @@ public class MBIPController {
         boolean isAuthenticated = userService.authenticate(email, password);
         
         if (isAuthenticated) {
-            User user = userService.findUserByEmail(email); // Assuming such a method exists in UserService
+            User user = userService.findByEmailAndPassword(email,password); // Assuming such a method exists in UserService
             model.addAttribute("user", user);
     
             // Redirect based on user role
             if ("admin".equals(user.getRole())) {
-                return "redirect:/index"; // Redirect to index.jsp for admins
+                return "index"; // Redirect to index.jsp for admins
             } else {
                 model.addAttribute("message", "Welcome " + user.getEmail());
                 return "HomePage"; // Redirect to user dashboard for regular users
@@ -46,7 +47,16 @@ public class MBIPController {
             return "login";
         }
     }
+
+    @PostMapping("/upload/{id}")
+    public ModelAndView showEditForm(@PathVariable("id") int id) throws SQLException {
+        User user = userService.findUserById(id);
+        ModelAndView modelAndView = new ModelAndView("upload");
+        modelAndView.addObject("user", user);
+        return modelAndView;
+        
     
 
     // Additional mappings for other functionalities
-}    
+    }    
+}
